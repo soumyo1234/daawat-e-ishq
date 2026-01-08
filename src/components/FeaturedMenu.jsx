@@ -2,7 +2,7 @@ import { Clock, Star, Users } from 'lucide-react';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
-import kachiiImg from '../Assets/Kachii Biriyani.jpg';
+import kachiiImg from '../Assets/kachii-biriyani.jpg';
 import butterChickenImg from '../Assets/butterchicken.jpg';
 import paneerImg from '../Assets/paneer-butter-masala.png';
 import ElishImg from '../Assets/Elish.jpg';
