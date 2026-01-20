@@ -1,19 +1,61 @@
 import { ArrowLeft, Minus, Package, Plus, ShoppingBag, Tag, Trash2, TrendingUp, X } from 'lucide-react';
-import { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { CartContext } from '../context/CartContext';
-import './Cart.css';
+import { useState } from 'react';
+
 const Cart = () => {
-  const {
-    cartItems,
-    removeFromCart,
-    updateQuantity,
-    clearCart,
-    getTotalPrice,
-    getTaxAmount,
-    getFinalTotal,
-    isCartEmpty
-  } = useContext(CartContext);
+  // Mock cart data - replace with your actual state management
+  const [cartItems, setCartItems] = useState([
+    {
+      id: 1,
+      name: "Margherita Pizza",
+      description: "Classic delight with 100% real mozzarella cheese",
+      price: 299,
+      quantity: 2
+    },
+    {
+      id: 2,
+      name: "Chicken Burger",
+      description: "Juicy grilled chicken patty with fresh vegetables",
+      price: 199,
+      quantity: 1
+    },
+    {
+      id: 3,
+      name: "Caesar Salad",
+      description: "Crisp romaine lettuce with parmesan and croutons",
+      price: 149,
+      quantity: 1
+    }
+  ]);
+
+  const removeFromCart = (id) => {
+    setCartItems(cartItems.filter(item => item.id !== id));
+  };
+
+  const updateQuantity = (id, newQuantity) => {
+    setCartItems(cartItems.map(item => 
+      item.id === id ? { ...item, quantity: newQuantity } : item
+    ));
+  };
+
+  const clearCart = () => {
+    setCartItems([]);
+  };
+
+  const getTotalPrice = () => {
+    return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+  };
+
+  const getTaxAmount = () => {
+    return getTotalPrice() * 0.05;
+  };
+
+  const getFinalTotal = () => {
+    return getTotalPrice() + getTaxAmount();
+  };
+
+  const isCartEmpty = () => {
+    return cartItems.length === 0;
+  };
 
   const [hoveredItem, setHoveredItem] = useState(null);
   const [showClearConfirm, setShowClearConfirm] = useState(false);
@@ -177,6 +219,7 @@ const Cart = () => {
                           </button>
                         </div>
                       </div>
+                    </div>
                   </div>
                 ))}
               </div>
